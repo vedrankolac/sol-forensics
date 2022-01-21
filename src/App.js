@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import GoogleFontLoader from 'react-google-font-loader';
+import axios from "axios";
+import { useState, useEffect } from "react";
+import './App.scss';
 
-function App() {
+const App = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    loadNewData();
+  }, []);
+
+  const loadNewData = () => {
+    const tokenAddress = 'orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE';
+    const limit = '10';
+    const baseURL = `https://public-api.solscan.io/token/holders?tokenAddress=${tokenAddress}&offset=0&limit=${limit}`;
+
+    axios.get(baseURL).then(response => {
+      console.log('response', response);
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GoogleFontLoader
+        fonts={[
+          {
+            font: 'Roboto Mono',
+            weights: [400, 700],
+          },
+        ]}
+        subsets={['latin-ext']}
+      />
+      <div className="app">
+
+      </div>
+    </>
   );
 }
 
