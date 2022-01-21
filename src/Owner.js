@@ -15,7 +15,7 @@ const Owner = ({holderData=null}) => {
     const baseURL = `https://public-api.solscan.io/account/tokens?account=${holderAccount}`;
 
     axios.get(baseURL).then(response => {
-      console.log('Owner response', response.data);
+      // console.log('Owner response', response.data);
       const filtered = response.data.filter(item => item.tokenName != '');
 
       let portfolioValueTemp = 0;
@@ -24,7 +24,7 @@ const Owner = ({holderData=null}) => {
         if(typeof usdv == 'number') {
           portfolioValueTemp += usdv;
         }
-        console.log('portfolioValueTemp: ', portfolioValueTemp);
+        // console.log('portfolioValueTemp: ', portfolioValueTemp);
       })
 
       setportfolioValue(portfolioValueTemp);
@@ -36,6 +36,15 @@ const Owner = ({holderData=null}) => {
     const formatConfig = new Intl.NumberFormat("en-US", {
       style: "decimal",
       minimumFractionDigits: 0
+    });
+  
+    return formatConfig.format(price);
+  };
+
+  const formatPriceUSD = (price) => {
+    const formatConfig = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: 'USD'
     });
   
     return formatConfig.format(price);
@@ -79,14 +88,14 @@ const Owner = ({holderData=null}) => {
           <p className='owner-address'>
             <a>{formatOwnerAddress(holderData.owner)}</a>
             </p>
-          <p className='token-amount'> • {formatPrice(addDecimalPoint(holderData.amount))}</p>
+          <p className='token-amount'> • {formatPrice(addDecimalPoint(holderData.amount))} (tokens)</p>
         </div>
-        <p className='wallet-value'>${formatPriceLarge(portfolioValue)}</p>
+        <p className='wallet-value'>{formatPriceUSD(portfolioValue)}</p>
       </div>
       {ownerData && <div className="details">
         {ownerData.map(token => (
           <div className="token-item">
-            <p><span className="token-name">{token.tokenName}</span> {'$' + formatPrice(getValueInUSD(token))}</p>
+            <p><span className={token.tokenName == 'Orca' ? 'token-name-orca' : 'token-name'}>{token.tokenName}</span> {formatPriceUSD(getValueInUSD(token))}</p>
           </div>
         ))}
       </div>}

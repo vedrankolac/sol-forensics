@@ -27,6 +27,7 @@
 
     .wallet-value {
       font-weight: 700;
+      color:blue;
     }
 
     p {
@@ -42,6 +43,15 @@
     .token-item {
       .token-name {
         background-color: black;
+        color: white;
+        padding: 0px 6px;
+        margin: 2px 0px 2px 6px;
+        border-radius: 20px;
+        font-weight: 700;
+      }
+
+      .token-name-orca {
+        background-color: blue;
         color: white;
         padding: 0px 6px;
         margin: 2px 0px 2px 6px;
