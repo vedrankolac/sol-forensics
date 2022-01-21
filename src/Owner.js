@@ -76,7 +76,9 @@ const Owner = ({holderData=null}) => {
       <div className="general">
         <div className="left-aligned">
           <p className="rank">{holderData.rank}. </p>
-          <p className='owner-address'>{formatOwnerAddress(holderData.owner)}</p>
+          <p className='owner-address'>
+            <a>{formatOwnerAddress(holderData.owner)}</a>
+            </p>
           <p className='token-amount'> • {formatPrice(addDecimalPoint(holderData.amount))}</p>
         </div>
         <p className='wallet-value'>${formatPriceLarge(portfolioValue)}</p>
