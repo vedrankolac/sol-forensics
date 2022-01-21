@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/trading-dashboard/static/css/main.0e4e30d8.css",
-    "main.js": "/trading-dashboard/static/js/main.6b2243f6.js",
-    "static/js/787.3954e4a4.chunk.js": "/trading-dashboard/static/js/787.3954e4a4.chunk.js",
-    "index.html": "/trading-dashboard/index.html",
-    "main.0e4e30d8.css.map": "/trading-dashboard/static/css/main.0e4e30d8.css.map",
-    "main.6b2243f6.js.map": "/trading-dashboard/static/js/main.6b2243f6.js.map",
-    "787.3954e4a4.chunk.js.map": "/trading-dashboard/static/js/787.3954e4a4.chunk.js.map"
+    "main.css": "/sol-forensics/static/css/main.0e4e30d8.css",
+    "main.js": "/sol-forensics/static/js/main.f67afc50.js",
+    "static/js/787.3954e4a4.chunk.js": "/sol-forensics/static/js/787.3954e4a4.chunk.js",
+    "index.html": "/sol-forensics/index.html",
+    "main.0e4e30d8.css.map": "/sol-forensics/static/css/main.0e4e30d8.css.map",
+    "main.f67afc50.js.map": "/sol-forensics/static/js/main.f67afc50.js.map",
+    "787.3954e4a4.chunk.js.map": "/sol-forensics/static/js/787.3954e4a4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0e4e30d8.css",
-    "static/js/main.6b2243f6.js"
+    "static/js/main.f67afc50.js"
   ]
 }
