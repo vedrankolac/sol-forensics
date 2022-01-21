@@ -1,3 +1,15 @@
 .app {
-  background-color: white;
+  font-family: 'Roboto Mono', sans-serif;
+  padding: 20px;
+
+  h1 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0px;
+    color: blue;
+  }
+
+  .holders {
+    width: 280px;
+  }
 }

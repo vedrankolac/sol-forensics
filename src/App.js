@@ -1,22 +1,25 @@
 import GoogleFontLoader from 'react-google-font-loader';
 import axios from "axios";
 import { useState, useEffect } from "react";
+
+import Owner from './Owner';
 import './App.scss';
 
 const App = () => {
-  const [data, setData] = useState(null);
+  const tokenAddress = 'orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE';
+  const [holders, setHolders] = useState(null);
 
   useEffect(() => {
     loadNewData();
   }, []);
 
   const loadNewData = () => {
-    const tokenAddress = 'orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE';
-    const limit = '10';
+    const limit = '100';
     const baseURL = `https://public-api.solscan.io/token/holders?tokenAddress=${tokenAddress}&offset=0&limit=${limit}`;
 
     axios.get(baseURL).then(response => {
       console.log('response', response);
+      setHolders(response.data.data);
     })
   }
 
@@ -32,7 +35,12 @@ const App = () => {
         subsets={['latin-ext']}
       />
       <div className="app">
-
+        <h1>TOKEN ADDRESS: {tokenAddress}</h1>
+        {holders && <div className='holders'>
+          {holders.map(holder => (
+            <Owner key={holder.rank} holderData={holder} />
+          ))}
+        </div>}
       </div>
     </>
   );
