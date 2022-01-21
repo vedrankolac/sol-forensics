@@ -14,7 +14,7 @@ const App = () => {
   }, []);
 
   const loadNewData = () => {
-    const limit = '100';
+    const limit = '30';
     const baseURL = `https://public-api.solscan.io/token/holders?tokenAddress=${tokenAddress}&offset=0&limit=${limit}`;
 
     axios.get(baseURL).then(response => {
@@ -35,7 +35,7 @@ const App = () => {
         subsets={['latin-ext']}
       />
       <div className="app">
-        <h1>TOKEN ADDRESS: {tokenAddress}</h1>
+        <h1>{tokenAddress} (token address)</h1>
         {holders && <div className='holders'>
           {holders.map(holder => (
             <Owner key={holder.rank} holderData={holder} />

@@ -1,9 +1,62 @@
 .owner {
-  display: flex;
-  justify-content: space-between;
+  border-bottom: solid black 1px;
+  padding-bottom: 20px;
 
-  p {
-    font-size: 14px;
-    margin: 6px 0px 0px 0px;
+  .general {
+    display: flex;
+    justify-content: space-between;
+    background-color: bisque;
+    padding: 0px 10px;
+
+    .left-aligned {
+      display: flex;
+
+      .rank {
+        // width: 30px;
+        padding-right: 6px;
+      }
+
+      .owner-address {
+        padding-right: 6px;
+      }
+
+      .token-amount {
+        font-weight: 700;
+      }
+    }
+
+    .wallet-value {
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 2px 0px 2px 0px;
+    }
   }
+  .details {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 6px 0px;
+
+    .token-item {
+      .token-name {
+        background-color: black;
+        color: white;
+        padding: 0px 6px;
+        margin: 2px 0px 2px 6px;
+        border-radius: 20px;
+        font-weight: 700;
+      }
+
+      p {
+        font-size: 14px;
+        margin: 6px 0px 0px 0px;
+      } 
+    }
+  }
+}
+
+.owner:first-child {
+  border-top: solid black 1px;
 }
