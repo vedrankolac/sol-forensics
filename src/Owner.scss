@@ -1,6 +1,5 @@
 .owner {
   border-bottom: solid black 1px;
-  padding-bottom: 6px;
 
   .general {
     display: flex;
@@ -38,10 +37,15 @@
     }
   }
 
+  .details {
+    padding: 6px 0px 6px 0px;
+    // display: none;
+  }
+
   .details-graph {
     display: flex;
     flex-wrap: wrap;
-    padding: 6px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
 
     .token-item {
       padding-right: 8px;

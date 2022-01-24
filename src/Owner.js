@@ -107,28 +107,30 @@ const Owner = ({holderData=null}) => {
         </div>
         <p className='wallet-value'>${formatValueLarge(portfolioValue)}</p>
       </div>
-      {tokensWithUSDPrice && <div className="details-graph">
-        {tokensWithUSDPrice.map(token => (
-          <div className="token-item" key={token.address}>
-            <p>
-              <span 
-                className={token.tokenName == 'Orca' ? 'token-name-orca' : 'token-name'}
-                style={{backgroundColor: token.tokenName == 'Orca' ? '' : `hsl(300, ${getValueInUSD(token)/portfolioValue*100}%, 40%)`}}
-              >{token.tokenName}</span><span className="small-graph"></span>${formatValueLarge(getValueInUSD(token))}
-            </p>
-            {/* <div className="graph-line-holder">
-              <div className="graph-line" style={{width: getValueInUSD(token)/portfolioValue*100+'%'}}></div>
-            </div> */}
-          </div>
-        ))}
-      </div>}
-      {tokensWithNoUSDPrice && <div className="details-other">
-        {tokensWithNoUSDPrice.map(token => (
-          <div className="token-item" key={token.address}>
-            <p><span className='token-name-other'>{token.tokenName}</span>{formatValueLarge(token.tokenAmount.uiAmount)}</p>
-          </div>
-        ))}
-      </div>}
+      <div className="details">
+        {tokensWithUSDPrice && <div className="details-graph">
+          {tokensWithUSDPrice.map(token => (
+            <div className="token-item" key={token.address}>
+              <p>
+                <span 
+                  className={token.tokenName == 'Orca' ? 'token-name-orca' : 'token-name'}
+                  style={{backgroundColor: token.tokenName == 'Orca' ? '' : `hsl(300, ${getValueInUSD(token)/portfolioValue*100}%, 40%)`}}
+                >{token.tokenName}</span><span className="small-graph"></span>${formatValueLarge(getValueInUSD(token))}
+              </p>
+              {/* <div className="graph-line-holder">
+                <div className="graph-line" style={{width: getValueInUSD(token)/portfolioValue*100+'%'}}></div>
+              </div> */}
+            </div>
+          ))}
+        </div>}
+        {tokensWithNoUSDPrice && <div className="details-other">
+          {tokensWithNoUSDPrice.map(token => (
+            <div className="token-item" key={token.address}>
+              <p><span className='token-name-other'>{token.tokenName}</span>{formatValueLarge(token.tokenAmount.uiAmount)}</p>
+            </div>
+          ))}
+        </div>}
+      </div>
     </div>
   )
 }
