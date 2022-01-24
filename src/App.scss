@@ -1,12 +1,24 @@
 .app {
   font-family: 'Roboto Mono', sans-serif;
-  padding: 20px;
+  padding: 8px;
+
+  .search-form {
+    display: flex;
+    justify-content: start;
+    border-bottom: 1px solid black;
+    padding-bottom: 6px;
+    font-size: 14px;
+
+    .address-search {
+      width: 350px;
+    }
+  }
 
   h1 {
     font-size: 14px;
     font-weight: 400;
     margin: 0px;
-    padding-bottom: 20px;
+    padding: 6px 0px;
     color: blue;
   }
 }

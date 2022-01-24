@@ -6,21 +6,32 @@ import Owner from './Owner';
 import './App.scss';
 
 const App = () => {
-  const tokenAddress = 'orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE';
+  const InitTokenAddress = 'orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE';
   const [holders, setHolders] = useState(null);
+  const [tokenAddress, setTokenAddress] = useState(null);
 
   useEffect(() => {
-    loadNewData();
+    setTokenAddress(InitTokenAddress);
+    loadNewData(InitTokenAddress);
   }, []);
 
-  const loadNewData = () => {
+  const loadNewData = newTokenAddress => {
     const limit = '30';
-    const baseURL = `https://public-api.solscan.io/token/holders?tokenAddress=${tokenAddress}&offset=0&limit=${limit}`;
+    const baseURL = `https://public-api.solscan.io/token/holders?tokenAddress=${newTokenAddress}&offset=0&limit=${limit}`;
 
     axios.get(baseURL).then(response => {
-      console.log('response', response);
+      // console.log('response', response);
       setHolders(response.data.data);
     })
+  }
+
+  const handleChange = event => {
+    setTokenAddress(event.target.value);
+  }
+
+  const handleSubmit = event => {
+    loadNewData(tokenAddress);
+    event.preventDefault();
   }
 
   return (
@@ -35,7 +46,13 @@ const App = () => {
         subsets={['latin-ext']}
       />
       <div className="app">
-        <h1>{tokenAddress} (token address)</h1>
+        <form className='search-form' onSubmit={handleSubmit}>
+          <label>
+            A <input className='address-search' type="text" value={tokenAddress} onChange={handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        <h1>{tokenAddress}</h1>
         {holders && <div className='holders'>
           {holders.map(holder => (
             <Owner key={holder.rank} holderData={holder} />

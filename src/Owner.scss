@@ -1,23 +1,25 @@
 .owner {
   border-bottom: solid black 1px;
-  padding-bottom: 20px;
+  padding-bottom: 6px;
 
   .general {
     display: flex;
     justify-content: space-between;
-    background-color: bisque;
-    padding: 0px 10px;
+    // background-color: bisque;
+    padding: 0px 4px;
+    border-bottom: 1px dotted black;
 
     .left-aligned {
       display: flex;
 
       .rank {
-        // width: 30px;
         padding-right: 6px;
+        font-weight: 700;
       }
 
       .owner-address {
         padding-right: 6px;
+        // font-weight: 700;
       }
 
       .token-amount {
@@ -26,8 +28,8 @@
     }
 
     .wallet-value {
-      font-weight: 700;
-      color:blue;
+      // font-weight: 700;
+      color:black;
     }
 
     p {
@@ -35,17 +37,20 @@
       margin: 2px 0px 2px 0px;
     }
   }
-  .details {
+
+  .details-graph {
     display: flex;
     flex-wrap: wrap;
-    padding: 6px 0px;
+    padding: 6px 0px 0px 0px;
 
     .token-item {
+      padding-right: 8px;
+
       .token-name {
         background-color: black;
         color: white;
         padding: 0px 6px;
-        margin: 2px 0px 2px 6px;
+        margin: 2px 8px 2px 0px;
         border-radius: 20px;
         font-weight: 700;
       }
@@ -54,14 +59,55 @@
         background-color: blue;
         color: white;
         padding: 0px 6px;
-        margin: 2px 0px 2px 6px;
+        margin: 2px 8px 2px 0px;
         border-radius: 20px;
         font-weight: 700;
+        // box-shadow: 0px 0px 0px 1px blue inset;
+        // border: 1px solid blue;
+      }
+
+      p {
+        position: relative;
+        font-size: 14px;
+        margin: 0px 0px 4px 0px;
+      }
+
+      // .small-graph {
+      //   background-color: black;
+      // }
+
+      // .graph-line-holder {
+      //   padding: 10px;
+
+      //   .graph-line {
+      //     height: 6px;
+      //     background-color: gray;
+      //     margin: 0px 6px;
+      //   }
+      // }
+    }
+  }
+
+  .details-other {
+    display: flex;
+    flex-wrap: wrap;
+
+    .token-item {
+      padding-right: 8px;
+
+      .token-name-other {
+        background-color: white;
+        color: black;
+        padding: 0px 6px;
+        margin: 2px 8px 2px 0px;
+        border-radius: 20px;
+        font-weight: 400;
+        box-shadow: 0px 0px 0px 1px black inset;        
       }
 
       p {
         font-size: 14px;
-        margin: 6px 0px 0px 0px;
+        margin: 0px 0px 4px 0px;
       } 
     }
   }

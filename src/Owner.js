@@ -4,32 +4,55 @@ import './Owner.scss';
 
 const Owner = ({holderData=null}) => {
   const holderAccount = holderData.owner;
-  const [ownerData, setOwnerData] = useState(null);
   const [portfolioValue, setportfolioValue] = useState(null);
+  const [tokensWithUSDPrice, setTokensWithUSDPrice] = useState(null);
+  const [tokensWithNoUSDPrice, setTokensWithNoUSDPrice] = useState(null);
 
   useEffect(() => {
+    setportfolioValue(null);
+    setTokensWithUSDPrice(null);
+    setTokensWithNoUSDPrice(null);
     loadNewData();
-  }, []);
+  }, [holderData]);
 
   const loadNewData = () => {
     const baseURL = `https://public-api.solscan.io/account/tokens?account=${holderAccount}`;
 
     axios.get(baseURL).then(response => {
-      // console.log('Owner response', response.data);
-      const filtered = response.data.filter(item => item.tokenName != '');
+      const tokensWithUSDPrice = response.data.filter(item => (item.tokenName != '' && item.tokenAmount.uiAmount && item.priceUsdt));
+      const tokensWithNoUSDPrice = response.data.filter(item => (item.tokenName != '' && item.tokenAmount.uiAmount && !item.priceUsdt));
 
       let portfolioValueTemp = 0;
-      filtered.map(token => {
-        let usdv = getValueInUSD(token);
-        if(typeof usdv == 'number') {
-          portfolioValueTemp += usdv;
+      tokensWithUSDPrice.map(token => {
+        let tokenUSDTValue = getValueInUSD(token);
+        token.tokenUSDTValue = tokenUSDTValue;
+        if(typeof tokenUSDTValue == 'number') {
+          portfolioValueTemp += tokenUSDTValue;
         }
-        // console.log('portfolioValueTemp: ', portfolioValueTemp);
       })
 
+      tokensWithUSDPrice.sort((a, b) => {
+        return b.tokenUSDTValue - a.tokenUSDTValue;
+      });
+
+      tokensWithNoUSDPrice.sort((a, b) => {
+        return b.tokenAmount.uiAmount - a.tokenAmount.uiAmount;
+      });
+
+      // console.log('tokensWithUSDPrice', tokensWithUSDPrice);
+
       setportfolioValue(portfolioValueTemp);
-      setOwnerData(filtered);
+      setTokensWithUSDPrice(tokensWithUSDPrice);
+      setTokensWithNoUSDPrice(tokensWithNoUSDPrice);
     })
+  }
+
+  const getValueInUSD = token => {
+    if (token.tokenAmount.uiAmount && token.priceUsdt) {
+      return token.tokenAmount.uiAmount * token.priceUsdt;
+    } else {
+      return ''
+    }
   }
 
   const formatPrice = (price) => {
@@ -50,7 +73,7 @@ const Owner = ({holderData=null}) => {
     return formatConfig.format(price);
   };
 
-  const formatPriceLarge = (price) => {
+  const formatValueLarge = (price) => {
     const formatConfig = new Intl.NumberFormat("en-US", {
       style: "decimal",
       notation: "compact",
@@ -68,16 +91,8 @@ const Owner = ({holderData=null}) => {
   const formatOwnerAddress = address => {
     const prefix = address.slice(0, 4);
     const sufix = address.slice(-4);
-    // return prefix + '...' + sufix;
-    return address;
-  }
-
-  const getValueInUSD = token => {
-    if (token.tokenAmount.uiAmount && token.priceUsdt) {
-      return token.tokenAmount.uiAmount * token.priceUsdt;
-    } else {
-      return ''
-    }
+    return prefix + '...' + sufix;
+    // return address;
   }
 
   return (
@@ -88,14 +103,29 @@ const Owner = ({holderData=null}) => {
           <p className='owner-address'>
             <a>{formatOwnerAddress(holderData.owner)}</a>
             </p>
-          <p className='token-amount'> • {formatPrice(addDecimalPoint(holderData.amount))} (tokens)</p>
+          <p className='token-amount'> • {formatValueLarge(addDecimalPoint(holderData.amount))}</p>
         </div>
-        <p className='wallet-value'>{formatPriceUSD(portfolioValue)}</p>
+        <p className='wallet-value'>${formatValueLarge(portfolioValue)}</p>
       </div>
-      {ownerData && <div className="details">
-        {ownerData.map(token => (
-          <div className="token-item">
-            <p><span className={token.tokenName == 'Orca' ? 'token-name-orca' : 'token-name'}>{token.tokenName}</span> {formatPriceUSD(getValueInUSD(token))}</p>
+      {tokensWithUSDPrice && <div className="details-graph">
+        {tokensWithUSDPrice.map(token => (
+          <div className="token-item" key={token.address}>
+            <p>
+              <span 
+                className={token.tokenName == 'Orca' ? 'token-name-orca' : 'token-name'}
+                style={{backgroundColor: token.tokenName == 'Orca' ? '' : `hsl(300, ${getValueInUSD(token)/portfolioValue*100}%, 40%)`}}
+              >{token.tokenName}</span><span className="small-graph"></span>${formatValueLarge(getValueInUSD(token))}
+            </p>
+            {/* <div className="graph-line-holder">
+              <div className="graph-line" style={{width: getValueInUSD(token)/portfolioValue*100+'%'}}></div>
+            </div> */}
+          </div>
+        ))}
+      </div>}
+      {tokensWithNoUSDPrice && <div className="details-other">
+        {tokensWithNoUSDPrice.map(token => (
+          <div className="token-item" key={token.address}>
+            <p><span className='token-name-other'>{token.tokenName}</span>{formatValueLarge(token.tokenAmount.uiAmount)}</p>
           </div>
         ))}
       </div>}
