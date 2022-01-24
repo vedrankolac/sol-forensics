@@ -48,7 +48,7 @@ const App = () => {
       <div className="app">
         <form className='search-form' onSubmit={handleSubmit}>
           <label>
-            A <input className='address-search' type="text" value={tokenAddress} onChange={handleChange} />
+            A <input className='address-search' type="text" value={tokenAddress ? tokenAddress : ''} onChange={handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
