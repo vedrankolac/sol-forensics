@@ -98,25 +98,28 @@ const Owner = ({holderData=null}) => {
 
   return (
     <div className="owner">
-      <div className="general" onClick={() => setShowDetails(showDetails ? false : true)}>
+      <div className={"general " + (showDetails ? 'expanded' : 'collapsed')} onClick={() => setShowDetails(showDetails ? false : ((tokensWithUSDPrice || tokensWithNoUSDPrice) ? true : false))}>
         <div className="left-aligned">
           <p className="rank">{holderData.rank}. </p>
           <p className='owner-address'>
             <a>{formatOwnerAddress(holderData.owner)}</a>
             </p>
-          <p className='token-amount'> {formatValue(addDecimalPoint(holderData.amount))}</p>
+          <p className='token-amount'> {formatValueLarge(addDecimalPoint(holderData.amount))}</p>
         </div>
-        <p className='wallet-value'>{formatPriceUSD(portfolioValue)}</p>
+        <p className='wallet-value'>{portfolioValue ? formatPriceUSD(portfolioValue) : '…'}</p>
       </div>
       <div className={"details " + (showDetails ? 'show' : 'hide')}>
         {tokensWithUSDPrice && <div className="details-graph">
           {tokensWithUSDPrice.map(token => (
             <div className="token-item" key={token.address}>
               <p>
-                <span 
-                  className={token.tokenName === 'Orca' ? 'token-name-orca' : 'token-name'}
-                  style={{backgroundColor: token.tokenName == 'Orca' ? '' : `hsl(300, ${getValueInUSD(token)/portfolioValue*100}%, 40%)`}}
-                >{token.tokenName}</span><span className="small-graph"></span>${formatValueLarge(getValueInUSD(token))}
+                <a href={'?tokenAddress=' + token.tokenAddress}>
+                  <span 
+                    className={token.tokenName === 'Orca' ? 'token-name-orca' : 'token-name'}
+                    style={{backgroundColor: token.tokenName == 'Orca' ? '' : `hsl(300, ${getValueInUSD(token)/portfolioValue*100}%, 40%)`}}
+                  >{token.tokenName}</span>
+                </a>
+                <span className="small-graph"></span>${formatValueLarge(getValueInUSD(token))}
               </p>
               {/* <div className="graph-line-holder">
                 <div className="graph-line" style={{width: getValueInUSD(token)/portfolioValue*100+'%'}}></div>
