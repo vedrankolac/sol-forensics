@@ -4,9 +4,9 @@
   .general {
     display: flex;
     justify-content: space-between;
-    // background-color: bisque;
+    background-color: #f0f8ff;
     padding: 0px 4px;
-    border-bottom: 1px dotted black;
+    cursor: pointer;
 
     .left-aligned {
       display: flex;
@@ -14,15 +14,19 @@
       .rank {
         padding-right: 6px;
         font-weight: 700;
+        width: 29px;
       }
 
       .owner-address {
         padding-right: 6px;
+        color: #7e7e7e;
         // font-weight: 700;
       }
 
       .token-amount {
-        font-weight: 700;
+        text-align: right;
+        width: 120px;
+        // font-weight: 700;
       }
     }
 
@@ -39,7 +43,20 @@
 
   .details {
     padding: 6px 0px 6px 0px;
-    // display: none;
+    border-top: 1px dotted black;
+  }
+
+  .details-expanded {
+    padding: 6px 0px 6px 0px;
+    border-top: 1px dotted black;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .hide {
+    display: none;
   }
 
   .details-graph {

@@ -7,6 +7,7 @@ const Owner = ({holderData=null}) => {
   const [portfolioValue, setportfolioValue] = useState(null);
   const [tokensWithUSDPrice, setTokensWithUSDPrice] = useState(null);
   const [tokensWithNoUSDPrice, setTokensWithNoUSDPrice] = useState(null);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     setportfolioValue(null);
@@ -55,7 +56,7 @@ const Owner = ({holderData=null}) => {
     }
   }
 
-  const formatPrice = (price) => {
+  const formatValue = (price) => {
     const formatConfig = new Intl.NumberFormat("en-US", {
       style: "decimal",
       minimumFractionDigits: 0
@@ -89,31 +90,31 @@ const Owner = ({holderData=null}) => {
   }
 
   const formatOwnerAddress = address => {
-    const prefix = address.slice(0, 4);
-    const sufix = address.slice(-4);
-    return prefix + '...' + sufix;
+    const prefix = address.slice(0, 3);
+    const sufix = address.slice(-2);
+    return prefix + '…' + sufix;
     // return address;
   }
 
   return (
     <div className="owner">
-      <div className="general">
+      <div className="general" onClick={() => setShowDetails(showDetails ? false : true)}>
         <div className="left-aligned">
           <p className="rank">{holderData.rank}. </p>
           <p className='owner-address'>
             <a>{formatOwnerAddress(holderData.owner)}</a>
             </p>
-          <p className='token-amount'> • {formatValueLarge(addDecimalPoint(holderData.amount))}</p>
+          <p className='token-amount'> {formatValue(addDecimalPoint(holderData.amount))}</p>
         </div>
-        <p className='wallet-value'>${formatValueLarge(portfolioValue)}</p>
+        <p className='wallet-value'>{formatPriceUSD(portfolioValue)}</p>
       </div>
-      <div className="details">
+      <div className={"details " + (showDetails ? 'show' : 'hide')}>
         {tokensWithUSDPrice && <div className="details-graph">
           {tokensWithUSDPrice.map(token => (
             <div className="token-item" key={token.address}>
               <p>
                 <span 
-                  className={token.tokenName == 'Orca' ? 'token-name-orca' : 'token-name'}
+                  className={token.tokenName === 'Orca' ? 'token-name-orca' : 'token-name'}
                   style={{backgroundColor: token.tokenName == 'Orca' ? '' : `hsl(300, ${getValueInUSD(token)/portfolioValue*100}%, 40%)`}}
                 >{token.tokenName}</span><span className="small-graph"></span>${formatValueLarge(getValueInUSD(token))}
               </p>
