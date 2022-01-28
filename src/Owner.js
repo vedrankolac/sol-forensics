@@ -40,8 +40,6 @@ const Owner = ({holderData=null}) => {
         return b.tokenAmount.uiAmount - a.tokenAmount.uiAmount;
       });
 
-      // console.log('tokensWithUSDPrice', tokensWithUSDPrice);
-
       setportfolioValue(portfolioValueTemp);
       setTokensWithUSDPrice(tokensWithUSDPrice);
       setTokensWithNoUSDPrice(tokensWithNoUSDPrice);
