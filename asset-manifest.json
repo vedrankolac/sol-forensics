@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/sol-forensics/static/css/main.4e7fbea2.css",
-    "main.js": "/sol-forensics/static/js/main.24371c61.js",
+    "main.css": "/sol-forensics/static/css/main.ac3e200b.css",
+    "main.js": "/sol-forensics/static/js/main.128c49f3.js",
     "static/js/787.3954e4a4.chunk.js": "/sol-forensics/static/js/787.3954e4a4.chunk.js",
     "index.html": "/sol-forensics/index.html",
-    "main.4e7fbea2.css.map": "/sol-forensics/static/css/main.4e7fbea2.css.map",
-    "main.24371c61.js.map": "/sol-forensics/static/js/main.24371c61.js.map",
+    "main.ac3e200b.css.map": "/sol-forensics/static/css/main.ac3e200b.css.map",
+    "main.128c49f3.js.map": "/sol-forensics/static/js/main.128c49f3.js.map",
     "787.3954e4a4.chunk.js.map": "/sol-forensics/static/js/787.3954e4a4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4e7fbea2.css",
-    "static/js/main.24371c61.js"
+    "static/css/main.ac3e200b.css",
+    "static/js/main.128c49f3.js"
   ]
 }
